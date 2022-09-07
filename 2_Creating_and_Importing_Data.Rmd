@@ -1,0 +1,474 @@
+---
+title: "2_Creating_and_Importing_Data"
+author: "Matt Steele"
+date: '2022-03-17'
+output: html_document
+---
+
+===============================================================================
+
+## Get and Set Working Directory ------------------------------------
+
+```{r message=FALSE, warning=FALSE}
+
+# get working directory
+
+  getwd()
+
+# set working directory
+  
+  setwd()
+  
+# you can set wd by using menu > session > set working directory > choose directory
+
+
+```
+
+
+===============================================================================
+
+## Part I - Creating Data in R | Vectors
+
+    - one-dimensional sequence of data elements
+    - use (c) To make a vector
+    - separate elements using (,) (comma)
+    - syntax == vectorSyntax <- c(object1, object2, object3)
+    
+```{r}
+
+exampleVector <- c(1, 2, 3)
+ exampleVector
+str(exampleVector)
+
+```
+
+    - a vector can also be a string of factors or characters    
+    
+```{r}
+
+wvTowns <- c("Morgantown", "Huntington", "Reedsville", "Charleston")
+  print(c("My favorite town in West Virginia is ", sample(wvTowns, size = 1)))
+  
+```
+
+
+#### LET'S CREATE A VECTOR IN YOUR RSCRIPT FILE
+
+
+===============================================================================
+
+#3 Part II - Creating Data in R | Data Frames
+
+    - two dimensional vectors that can multiple classes of values.
+    - You can also create matrices in R. Matrices are similar to data frames but can also have a single data value
+    - syntax == dataFrameSyntax <- data.frame(column1, column2, column3)
+
+```{r}
+
+  title <- c("Star Wars", "The Empire Strikes Back", "Return of the Jedi", "The Phantom Menace", "Attack of the Clones", "Revenge of the Sith", "Force Awakens", "The Last Jedi", "Rise of Skywalker")
+  year <- c(1972, 1980, 1983, 1999, 2002, 2005, 2015, 2017, 2019)
+  length.min <- c(121, 124, 133, 133, 142, 140, 135, 152, 141)
+  box.office.mil <- c(787, 534, 572, 1027, 657, 849, 2059, 1333, 1074)
+  
+  starWars.data <- data.frame(title, year, length.min, box.office.mil)
+  starWars.data
+
+```
+
+
+#### LET'S CREATE A DATA FRAME IN OUR RSCRIPT
+
+
+    # Let's get some information about our table
+      # Function: str() -> will give you information of a variable
+      # Fuction: head()
+      # Function: summary() -> will give you descriptive statistics on the data.frame
+    
+```{r}
+
+help("summary")
+
+
+summary(starWars.data)
+
+```
+
+    
+```{r}
+
+help("str")
+
+str(starWars.data)
+
+
+```
+
+    # Rename columns and tell R how to interpret the data frame
+    
+```{r}
+
+starWars.data <- data.frame(Title = title, Year = year, Length = length.min, Gross = box.office.mil, stringsAsFactors = T)
+  starWars.data
+
+```
+
+  
+#### LET'S TRY TO RENAME OUR VARIABLE
+
+
+    # Subsetting Data Frames 
+  
+      - You can view and perform actions on columns using the ($) for subsetting
+
+```{r}
+
+  starWars.data$Gross
+  summary(starWars.data$Gross) 
+  
+  ##try out mean of the length of films here
+
+
+```
+
+    # Mislabeled variables can be fixed
+    
+```{r}
+
+str(starWars.data)
+
+starWars.data$Year <- as.character(starWars.data$Year)
+  str(starWars.data)
+
+```
+
+
+    # Fix observations in a data frame
+    
+      - syntax == data.frame[rownumber, columnnumber] = newvalue
+    
+```{r}
+
+  starWars.data [1, 2] = "1977"
+    starWars.data  
+
+```
+
+### LET'S TRY IT OUT
+  
+  
+    # New variable can be created using ($) and (=)
+    
+```{r}
+
+starWars.data$Gross.billions = starWars.data$Gross / 1000
+
+  starWars.data
+
+```
+
+### LET'S TRY IT OUT
+
+
+    # Add new variables
+    
+```{r}
+
+  mark <- c(37.5, 34.75, 34.25, 0, 0, .75, 0, 25.75, 7.5)
+  carrie <- c(13.5, 22.75, 21.25, 0, 0, .5, 5.75, 12.75, 19.5)
+  
+  starWars.data$MarkScreenTime <- mark
+  starWars.data$CarrieScreenTime <- carrie
+  
+  starWars.data
+
+```
+
+
+#### LET'S TRY IT OUT
+
+
+    # Add new observations
+
+```{r}
+
+help("rbind")
+
+rogueOne <- data.frame(Title = "Rogue One", Year = 2016, Length = 133, Gross = 1051, Gross.billions = 1.051,  MarkScreenTime = 0, CarrieScreenTime = .25)
+
+rbind(starWars.data, rogueOne)
+
+```
+
+
+### LET'S TRY IT OUT
+
+===============================================================================
+
+## Part IV: Import Data into R ------------------------------------------------
+
+
+    # Function: read.*() ------------------------------------------------------
+
+```{r}
+
+help("read.table")
+
+```
+
+    # Function: read.table()
+    
+      - Allows you to add arguments and tell where seperations occur
+      
+      
+      #### DOWNTOWN EXAMPLE
+
+```{r}
+
+  coalProd <- read.csv("coalpublic2020.csv", sep = ",", header = T)
+    coalProd
+    
+    
+  View(coalProd)
+    
+    
+  
+```
+
+
+    #### HSL EXAMPLE
+
+
+```{r}
+
+idDeath <- read.csv("Death_Counts_id.csv")
+  idDeath
+  
+  View(idDeath)
+
+
+```
+
+
+
+    # Function: read.csv()
+    
+      - Assumes comma seperated data
+
+```{r}
+
+ college.majors <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/college-majors/all-ages.csv", stringsAsFactors = T)
+    college.majors
+
+```
+
+
+### LET'S TRY IT OUT
+
+    # Package: foreign
+    
+      - Allows you to read proprietary software files (SPSS, SAS, STATA) 
+      
+```{r}
+
+install.packages("foreign")
+
+```
+
+```{r}
+
+library(foreign)
+
+```
+
+```{r}
+
+help("read.spss")
+
+ spssDemo <- read.spss("demo.sav", use.value.labels = T)
+    view(spssDemo)
+    
+
+```
+
+###LET'S TRY IT OUT
+
+==============================================================================
+
+## Part V - Viewing your data
+
+
+    # Function: view() - view the full data frame
+    
+```{r}
+
+help("View")
+
+  view(college.majors)
+
+```
+  
+  
+    # Function: nrow() - view the number of rows/observations
+  
+```{r}
+
+help("nrow")
+
+    nrow(college.majors)
+
+```
+
+    # Function: ncol() - view the number of columns/variables
+    
+```{r}
+
+help("ncol")
+
+  ncol(college.majors)
+
+```
+  
+    # Function: colnames() - view the names of columns/variables
+    
+```{r}
+
+help("colnames")
+
+  colnames(college.majors)
+
+```
+
+    # Function: str() - view the structure of data
+    
+```{r}
+
+help("str")
+
+  str(college.majors)
+
+```
+
+    # Function: summary() - basic descriptive statistics
+    
+```{r}
+
+help("summary")
+
+  summary(college.majors)
+
+```
+
+
+    # Head and Tail: view top and bottom of data
+    
+```{r}
+
+help("summary")
+
+  summary(college.majors)
+
+```
+
+#### LET'S TRY IT OUT ------------------------
+
+==============================================================================
+
+## Part VI - Use Tidyverse to make things easier 
+
+```{r}
+
+#Make it clearer to view your data
+
+library(tidyverse)
+
+college.majors <- as_tibble(college.majors)
+college.majors
+
+```
+
+    ## Pipe Operator ( %>% ) -----------------------------------------------------
+
+      # allows you to separate and unite individual operations on an object
+        # CTRL + SHIFT + M (windows)
+        # CMD + SHIFT + M (mac)
+        
+      # data %>% operation A %>% operation B
+
+
+    ## Sort your data
+    
+```{r}
+
+help("arrange")
+
+arrange(college.majors, desc(Employed))  ## Most
+arrange(college.majors, Employed) ## Least
+
+```
+
+
+    ## Sort and Filter your data
+    
+    ## Downtown Example
+    
+```{r}
+
+?dplyr::filter
+
+  college.majors_subj <- college.majors %>%  
+    filter(Major_category == "Law & Public Policy") %>% 
+    arrange (desc(Employed))
+  college.majors_subj
+
+```
+
+    ## HSL Example
+    
+```{r}
+
+?dplyr::filter
+
+  college.majors_subj <- college.majors %>%  
+    filter(Major_category == "Health") %>% 
+    arrange (desc(Employed))
+  college.majors_subj
+
+```
+
+
+
+    ## Summary
+    
+```{r}
+
+mean(college.majors$Total)
+
+```
+    
+```{r}
+
+mean(college.majors_subj$Total)
+
+```
+
+
+
+### LET'S TRY IT OUT ------------------------------
+
+==============================================================================
+
+## Part VII - Exporting your data
+
+    # Function: write.*
+    
+```{r}
+
+help("write.table")
+
+  write.csv(college.majors_subj, "college_majors_subj")
+
+```
+    
+
+
+    

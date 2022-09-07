@@ -1,0 +1,438 @@
+---
+title: "workshop_firstSteps_R"
+author: "Matt Steele"
+date: '2022-03-17'
+output: html_document
+---
+
+=============================================================================
+
+## Resources ---------------------------------------------------------------
+
+    R download and documentation - https://cran.r-project.org/
+    RStudio download and documentation - https://rstudio.com/
+    
+    O'Reilly Learning Platform - https://databases.lib.wvu.edu/connect/1540334373
+    
+    R Programming for Statistics and Data Science -  https://libwvu.on.worldcat.org/oclc/1062397089
+        additional learning materials and exercieses
+        
+    CRAN Documentation - https://www.rdocumentation.org/
+        search for functions and/or packages to get documentation
+        
+    RStudio Cheat Sheets - https://www.rstudio.com/resources/cheatsheets/
+        keyboard shortcuts for popular packages
+      
+    R-Bloggers - https://www.r-bloggers.com/
+        stories and suggestions
+        
+=============================================================================
+
+## Setting Working Directory -------------------------------------------
+
+
+```{r warning= FALSE, message= FALSE}
+
+# get working directory
+
+  getwd()
+
+# set working directory
+  
+  setwd()
+  setwd("~/RWorkshop Development/workshop_firstSteps_R")
+  
+# you can set wd by using menu > session > set working directory > choose directory
+
+```
+
+==============================================================================
+
+
+## Part I - <<<Name>>>
+
+# Set preferences
+    
+        Tools > Global Options
+    
+    
+# Create and Save a file
+    
+        File >  create a new file, open previous files, and save files
+    
+    
+# Interface
+    
+    Console Panel - this is the pane on the left hand side of the monitor. 
+        a) when the Source pane is open it will drop to the bottom of the screen. 
+        b) you use it to run commands and see the results of your commands. 
+
+    Source Pane - this is the pane that you are viewing this script in. 
+        a) you create and edit scripts which you can then run in the console.
+        b) it is important that you can use to using the source pane for writing your commands.
+
+    Environment Pane - view objects and functions that you have created
+        
+# Tips and Tricks
+
+    1. Run Code - send commands to the console
+        a) Use the run button
+        b) Keyboard shortcuts
+            - CTRL + ENTER (windows)
+            - CMD + RETURN (mac)
+            - lines from scripts can be run by highlighting the relevant block of code.
+            
+```{r}
+
+
+    1 + 4 
+
+    heyThere <- 1 + 4
+    heyThere
+
+```
+
+    2. Create Scripts
+        a) File-->New File-->
+          - R Script
+          - RMarkdown
+          
+    3. Escape commands 
+        a) Escape button (esc) will break the execution of a command.
+        
+```{r}
+
+heyThere <- c(summary(heyThere)
+
+```
+
+
+    4. Help
+      a) Help tab in the Files Panel 
+        - tutorials
+        - cheat sheets (for available functions and commands)
+        - explanations and examples of using commands and functions
+        
+```{r}
+
+help("read.table")
+
+?vector
+
+#F1 while highlighted
+
+```
+
+    5. TAB button
+        a) auto-suggest
+            - functions
+            - arguments
+            - values
+            
+```{r}
+
+          help()
+
+```
+
+    6. Commentting 
+        a) # single lines 
+        b) ''' multiline
+        c) reminds you what a line of code does
+        
+        
+```{r}
+
+# The Old Pond by Matsuo Bashō
+
+'''
+  An old silent pond
+  A frog jumps into the pond—
+  Splash! Silence again.
+
+'''
+
+```
+
+    7. Packages  
+        a) packages only need to be installed once
+        b) packages always need to loaded -> library
+  
+```{r}
+
+help("install.packages")
+help("library")
+
+```
+    
+  
+===============================================================================
+
+## Part II - Basic Commands --------------------------------------------------
+
+
+# Built-in Functions
+
+     a) Functions are the operation that can be run on objects in R and values. 
+     b) Built-in functions from the bases version of R, or installed and loaded packages. 
+     c) You can create your own functions
+      
+```{r}
+
+# Addition:
+  129 + 3483
+  
+  # Subtraction:
+  23693 - 4536
+  
+  # Multiplication:
+  23 * 45
+  
+  # Division:
+  51/3
+  
+  # Exponents:
+  2^4
+  
+  # Logarithms (base e):
+  log(100)
+  
+  # Range
+  1:12
+  
+  # Sample
+  sample(1:50, 10)
+  
+
+```
+
+
+
+#### LET'S TRY OUT SOME ARTHMETIC IN YOUR RSCRIPT FILE
+
+
+
+# Arguments
+
+    a) Arguments are the values and parameters that are acted on by the function. 
+    b) An argument is a placeholder. 
+    c) When a function is invoked, you pass a value to the argument. 
+    d) Arguments are optional; that is, a function may contain no arguments.
+    e) Also arguments can have default values.
+    f) Arguments they must be in order that R requires
+    
+    
+```{r}
+
+  mean(1:300)
+  sample(6000:9999, size = 2)
+  
+  summary(range(1:500), quantile.type = 4)
+
+```
+
+
+#### LET'S TRY OUT SOME ARGUMENTS IN YOUR RSCRIPT FILE
+
+
+# Objects ---------------------------------------------------------------
+
+objects store information and allow you to call over and over. 
+
+      a) an object can be a single digit, a character, a vector, an imported csv, a data frame. 
+
+```{r}
+
+    a <- 3
+    
+    b <- 45
+    
+    a + b
+    
+    a + b <= 24
+    
+    my.house <- read.csv("house_2018_bystate.csv")
+
+```
+
+      b) Naming Conventions
+        - Use letters, numbers, punctuation, and underscores
+            Example 1 - longer.name
+            Example 2 - longer_name
+            Example 3 - longerName
+            
+```{r}
+
+  first.example <- sample(3:15, size = 1)
+    
+  second_example <- round(2.471, digits = 2)
+    
+  thirdExample <- mean(500:4000)
+  
+  first.example + second_example / thirdExample
+  
+```
+
+===============================================================================
+
+## Part III - Data Values
+
+    - When you have input a piece of data into R, the software will interpret it based on default settings. 
+    - as.*() -> built in function that can change the value of data
+
+# 1. Integer
+
+    - whole number with nothing after the decimal. 
+    - any whole number that a capital L after the digit will be interpreted as an integer
+
+```{r}
+
+  help("integer")
+
+```
+
+```{r}
+
+  exampleInteger <- 400L
+    str(exampleInteger) # tells you what class you data is
+
+```
+
+# 2. Double
+
+    - regular numbers (large small, positive, negative, with digits after the decimal, or without)
+    
+```{r}
+
+help("double")
+
+```
+
+```{r}
+
+  exampleDouble <- 400
+    str(exampleDouble)
+  
+
+```
+  
+# 3.  Character 
+
+    - non-numeric data such as text. 
+    - To denote a piece of data as a character in R use quotation marks("") around the characters. 
+    - R is very literal so even spaces need to be included
+ 
+```{r}
+
+  help('character')
+
+```
+ 
+    
+```{r}
+
+  exampleCharacter <- "Hello World"
+  exampleCharacter2 <- "26501"
+  
+    str(exampleCharacter2)
+
+
+```
+
+# 4. Factors 
+
+    - categorical variables
+    - data objects which are used to categorize the data and store it as levels. 
+    
+```{r}
+
+help("factor")
+
+```
+  
+```{r}
+
+exampleFactor <- read.csv ("https://raw.githubusercontent.com/fivethirtyeight/data/master/tarantino/tarantino.csv", stringsAsFactors = T)
+  summary(exampleFactor$movie)
+  str(exampleFactor$movie)
+  
+
+```
+
+# 5. Logical 
+
+    - boolean data objects that denote TRUE or FALSE 
+    
+```{r}
+
+help("logical")
+
+```
+
+```{r}
+
+exampleLogical <- T
+exampleLogical2 <- FALSE
+  
+  str(exampleLogical2)
+
+
+```
+
+===================================================================================
+
+## Part IV - Packages
+
+R is open source code after it's initial development people began adding to it with packages. An R Package is something that you can plug into RStudio to extend the basic functionality that is built in with R. One of the reasons that R has become so popular is because it has this rich ecosystem of packages that really make R a comprehensive platform for data science.
+
+For this workshop we are going to use a package called Tidyverse that was created for people working with data. Let's load it up and install it now.
+
+
+      # Installing Packages
+      
+```{r}
+
+help("install.packages")
+
+```
+      
+```{r}
+
+install.packages("tidyverse") # you only need to install a package once
+
+```
+
+      # Loading Packages
+      
+```{r}
+
+help("library")
+
+```
+
+```{r}
+
+library(tidyverse) # you need to call the library during each session
+
+```
+======================================================================================
+
+## Part V - Exportating Data
+
+    
+```{r}
+
+help("write.delim")
+
+exampleFactor <- read.csv ("https://raw.githubusercontent.com/fivethirtyeight/data/master/tarantino/tarantino.csv", stringsAsFactors = T)
+
+write.csv(exampleFactor, "example_factor.csv")
+
+```
+    
+    You can extract data using R and perform analysis and visualization functions in:
+      - R
+      - SAS
+      - Python
+      - STATA
+      - SPSS
