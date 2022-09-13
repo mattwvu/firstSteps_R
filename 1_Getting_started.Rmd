@@ -294,7 +294,7 @@ objects store information and allow you to call over and over.
 ```{r}
 
   exampleInteger <- 400L
-    str(exampleInteger) # tells you what class you data is
+    str(exampleInteger) # tells you what class your data is
 
 ```
 
