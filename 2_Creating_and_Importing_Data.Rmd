@@ -166,8 +166,6 @@ starWars.data$Gross.billions = starWars.data$Gross / 1000
 
 ```
 
-### LET'S TRY IT OUT
-
 
     # Add new variables
     
